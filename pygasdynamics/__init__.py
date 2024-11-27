@@ -23,3 +23,23 @@ library.gs_solve_discontinuity_exact.argtypes = (
     ctypes.POINTER(ctypes.c_float),
     ctypes.POINTER(ctypes.c_float),
 )
+
+library.gs_solve_discontinuity_numeric_hll.argtypes = (
+    ctypes.c_float,
+    ctypes.c_float,
+    ctypes.c_float,
+    ctypes.c_float,
+    ctypes.c_float,
+    ctypes.c_float,
+    ctypes.c_float,
+    ctypes.c_float,
+    ctypes.c_float,
+    ctypes.c_float,
+    ctypes.c_float,
+    ctypes.c_float,
+    ctypes.c_int,
+    ctypes.POINTER(ctypes.c_float),
+    ctypes.POINTER(ctypes.c_float),
+    ctypes.POINTER(ctypes.c_float),
+    ctypes.POINTER(ctypes.c_float),
+)
