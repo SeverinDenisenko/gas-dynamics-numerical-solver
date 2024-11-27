@@ -1,3 +1,3 @@
-[submodule "deps/riemann-problem-solver"]
-	path = deps/riemann-problem-solver
+[submodule "subprojects/riemann-problem-solver"]
+	path = subprojects/riemann-problem-solver
 	url = https://github.com/SeverinDenisenko/riemann-problem-solver.git
