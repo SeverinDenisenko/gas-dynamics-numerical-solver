@@ -50,12 +50,14 @@ void hll_solver::step()
     std::vector<real> flux_energy(n_);
 
     // indecies here are half-numbers
-    for (integer i = 1; i < n_ - 1; ++i) {
-        // compute eigenvalues
+    for (integer i = 1; i < n_ - 2; ++i) {
         double c_left  = std::sqrt(gamma_ * pressure_[i] / density_[i]);
         double c_rigth = std::sqrt(gamma_ * pressure_[i + 1] / density_[i + 1]);
-        real dl = std::min(velocity_[i] - c_left, velocity_[i + 1] - c_rigth);
-        real dr = std::max(velocity_[i] + c_left, velocity_[i + 1] + c_rigth);
+
+        real dl = std::min(velocity_[i], velocity_[i + 1])
+            - std::max(c_left, c_rigth);
+        real dr = std::max(velocity_[i], velocity_[i + 1])
+            + std::max(c_left, c_rigth);
 
         real flux_left_dencity  = momentum_[i];
         real flux_left_momentum = momentum_[i] * velocity_[i] + pressure_[i];
@@ -95,7 +97,7 @@ void hll_solver::step()
         }
     }
 
-    for (integer i = 1; i < n_ - 1; ++i) {
+    for (integer i = 2; i < n_ - 2; ++i) {
         density_[i] -= dt / dx_ * (flux_dencity[i] - flux_dencity[i - 1]);
         momentum_[i] -= dt / dx_ * (flux_momentum[i] - flux_momentum[i - 1]);
         energy_[i] -= dt / dx_ * (flux_energy[i] - flux_energy[i - 1]);
