@@ -1,13 +1,14 @@
 #pragma once
 
 #include <span>
+#include <vector>
 
 namespace gs {
 
 template <typename T>
 using span = std::span<T>;
 
-using real = float;
+using real    = float;
 using integer = float;
 
 class hll_solver {
@@ -25,6 +26,8 @@ public:
 
 private:
     real estimate_dt();
+    void update_conservative();
+    void update_primitive();
 
     span<real> density_;
     span<real> velocity_;
@@ -33,6 +36,10 @@ private:
     real gamma_;
     real c_;
     real t_;
+    real dx_;
+    size_t n_;
+    std::vector<real> momentum_;
+    std::vector<real> energy_;
 };
 
 }
